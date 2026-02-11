@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Countdown 15/03/2026</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, sans-serif;
+        }
+        body {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            text-align: center;
+        }
+        .container {
+            padding: 30px 40px;
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 20px;
+            backdrop-filter: blur(12px);
+            box-shadow: 0 0 40px rgba(0,0,0,0.4);
+        }
+        h1 {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+        p {
+            opacity: 0.8;
+            margin-bottom: 25px;
+        }
+        .countdown {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+        }
+        .box {
+            padding: 20px 10px;
+            background: rgba(0, 0, 0, 0.35);
+            border-radius: 15px;
+        }
+        .number {
+            font-size: 2.5rem;
+            font-weight: bold;
+        }
+        .label {
+            margin-top: 5px;
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+        footer {
+            margin-top: 25px;
+            font-size: 0.85rem;
+            opacity: 0.6;
+        }
+        @media (max-width: 600px) {
+            .countdown {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>⏳ Countdown THPT 2027</h1>
+    <p>Đếm ngược đến <b>07:00 • 15/03/2026</b></p>
+
+    <div class="countdown">
+        <div class="box">
+            <div class="number" id="days">0</div>
+            <div class="label">Ngày</div>
+        </div>
+        <div class="box">
+            <div class="number" id="hours">0</div>
+            <div class="label">Giờ</div>
+        </div>
+        <div class="box">
+            <div class="number" id="minutes">0</div>
+            <div class="label">Phút</div>
+        </div>
+        <div class="box">
+            <div class="number" id="seconds">0</div>
+            <div class="label">Giây</div>
+        </div>
+    </div>
+
+    <footer>
+        made with ☕ by HungYesPro
+    </footer>
+</div>
+
+<script>
+    // 07:00 sáng 15/03/2026 (giờ địa phương)
+    const targetTime = new Date(2026, 2, 15, 7, 0, 0).getTime();
+
+    function updateCountdown() {
+        const now = new Date().getTime();
+        const diff = targetTime - now;
+
+        if (diff <= 0) {
+            document.querySelector('.countdown').innerHTML =
+                "<h2>🎉 ĐÃ ĐẾN THỜI ĐIỂM!</h2>";
+            return;
+        }
+
+        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+        const minutes = Math.floor((diff / (1000 * 60)) % 60);
+        const seconds = Math.floor((diff / 1000) % 60);
+
+        document.getElementById("days").textContent = days;
+        document.getElementById("hours").textContent = hours;
+        document.getElementById("minutes").textContent = minutes;
+        document.getElementById("seconds").textContent = seconds;
+    }
+
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+</script>
+
+</body>
+</html>
