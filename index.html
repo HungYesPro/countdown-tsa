@@ -2,128 +2,104 @@
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
-    <title>Countdown 16/05/2026</title>
+    <title>Countdown TSA đợt 3</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, sans-serif;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             min-height: 100vh;
-            background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 40%, #f093fb 100%);
             display: flex;
             align-items: center;
             justify-content: center;
-            color: #fff;
+            font-family: 'Segoe UI', Tahoma, sans-serif;
+        }
+        .cd-card {
+            background: rgba(255,255,255,0.18);
+            border: 1px solid rgba(255,255,255,0.35);
+            border-radius: 24px;
+            padding: 36px 44px;
             text-align: center;
+            color: #fff;
+            max-width: 480px;
+            width: 90vw;
         }
-        .container {
-            padding: 30px 40px;
-            background: rgba(255, 255, 255, 0.08);
-            border-radius: 20px;
-            backdrop-filter: blur(12px);
-            box-shadow: 0 0 40px rgba(0,0,0,0.4);
+        .cd-title {
+            font-size: 1.75rem;
+            font-weight: 700;
+            margin-bottom: 6px;
         }
-        h1 {
-            font-size: 2rem;
-            margin-bottom: 10px;
+        .cd-sub {
+            font-size: 0.92rem;
+            color: rgba(255,255,255,0.82);
+            margin-bottom: 28px;
         }
-        p {
-            opacity: 0.8;
-            margin-bottom: 25px;
-        }
-        .countdown {
+        .cd-sub b { color: #fff; }
+        .cd-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 15px;
+            gap: 12px;
+            margin-bottom: 24px;
         }
-        .box {
-            padding: 20px 10px;
-            background: rgba(0, 0, 0, 0.35);
-            border-radius: 15px;
+        .cd-box {
+            background: rgba(255,255,255,0.22);
+            border: 1px solid rgba(255,255,255,0.3);
+            border-radius: 16px;
+            padding: 18px 8px 14px;
         }
-        .number {
-            font-size: 2.5rem;
-            font-weight: bold;
+        .cd-num {
+            font-size: 2.4rem;
+            font-weight: 800;
+            line-height: 1;
+            color: #fff;
         }
-        .label {
-            margin-top: 5px;
-            font-size: 0.9rem;
-            opacity: 0.8;
+        .cd-lbl {
+            font-size: 0.78rem;
+            color: rgba(255,255,255,0.75);
+            margin-top: 6px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
-        footer {
-            margin-top: 25px;
-            font-size: 0.85rem;
-            opacity: 0.6;
+        .cd-footer {
+            font-size: 0.82rem;
+            color: rgba(255,255,255,0.6);
+            font-style: italic;
         }
-        @media (max-width: 600px) {
-            .countdown {
-                grid-template-columns: repeat(2, 1fr);
-            }
+        @media (max-width: 420px) {
+            .cd-grid { grid-template-columns: repeat(2, 1fr); }
+            .cd-card { padding: 24px 20px; }
         }
     </style>
 </head>
 <body>
-
-<div class="container">
-    <h1>⏳ Countdown TSA đợt 3</h1>
-    <p>Đếm ngược đến <b>07:00 • 16/05/2026</b></p>
-
-    <div class="countdown">
-        <div class="box">
-            <div class="number" id="days">0</div>
-            <div class="label">Ngày</div>
-        </div>
-        <div class="box">
-            <div class="number" id="hours">0</div>
-            <div class="label">Giờ</div>
-        </div>
-        <div class="box">
-            <div class="number" id="minutes">0</div>
-            <div class="label">Phút</div>
-        </div>
-        <div class="box">
-            <div class="number" id="seconds">0</div>
-            <div class="label">Giây</div>
-        </div>
+<div class="cd-card">
+    <div class="cd-title">⏳ Countdown TSA đợt 3</div>
+    <div class="cd-sub">Đếm ngược đến <b>07:00 • 16/05/2026</b></div>
+    <div class="cd-grid" id="grid">
+        <div class="cd-box"><div class="cd-num" id="days">0</div><div class="cd-lbl">Ngày</div></div>
+        <div class="cd-box"><div class="cd-num" id="hours">0</div><div class="cd-lbl">Giờ</div></div>
+        <div class="cd-box"><div class="cd-num" id="minutes">0</div><div class="cd-lbl">Phút</div></div>
+        <div class="cd-box"><div class="cd-num" id="seconds">0</div><div class="cd-lbl">Giây</div></div>
     </div>
-
-    <footer>
-        vua lọ TrGiaHưng
-    </footer>
+    <div class="cd-footer">vua lọ TrGiaHưng</div>
 </div>
-
 <script>
-    // 07:00 sáng 16/05/2026 (giờ địa phương)
-    const targetTime = new Date(2026, 5, 16, 7, 0, 0).getTime();
-
-    function updateCountdown() {
-        const now = new Date().getTime();
-        const diff = targetTime - now;
-
+    const target = new Date(2026, 4, 16, 7, 0, 0).getTime();
+    function tick() {
+        const diff = target - Date.now();
         if (diff <= 0) {
-            document.querySelector('.countdown').innerHTML =
-                "<h2>🎉 ĐÃ ĐẾN THỜI ĐIỂM! CHÚC BẠN THI TỐT NHÉ 😍😍</h2>";
+            document.getElementById('grid').innerHTML =
+                '<div style="font-size:1.3rem;font-weight:600;padding:16px">🎉 ĐÃ ĐẾN THỜI ĐIỂM! CHÚC BẠN THI TỐT NHÉ 😍</div>';
             return;
         }
-
-        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-        const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
-        const minutes = Math.floor((diff / (1000 * 60)) % 60);
-        const seconds = Math.floor((diff / 1000) % 60);
-
-        document.getElementById("days").textContent = days;
-        document.getElementById("hours").textContent = hours;
-        document.getElementById("minutes").textContent = minutes;
-        document.getElementById("seconds").textContent = seconds;
+        document.getElementById('days').textContent    = Math.floor(diff / 86400000);
+        document.getElementById('hours').textContent   = Math.floor(diff / 3600000) % 24;
+        document.getElementById('minutes').textContent = Math.floor(diff / 60000) % 60;
+        document.getElementById('seconds').textContent = Math.floor(diff / 1000) % 60;
     }
-
-    updateCountdown();
-    setInterval(updateCountdown, 1000);
+    tick();
+    setInterval(tick, 1000);
 </script>
-
 </body>
 </html>
