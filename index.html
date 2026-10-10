@@ -2,7 +2,7 @@
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
-    <title>Countdown TSA đợt 3</title>
+    <title>Countdown TSA đợt 1</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -74,8 +74,8 @@
 </head>
 <body>
 <div class="cd-card">
-    <div class="cd-title">⏳ Countdown TSA đợt 3</div>
-    <div class="cd-sub">Đếm ngược đến <b>07:00 • 16/05/2026</b></div>
+    <div class="cd-title">⏳ Countdown TSA đợt 1</div>
+    <div class="cd-sub">Đếm ngược đến <b>07:00 • 16/01/2027</b></div>
     <div class="cd-grid" id="grid">
         <div class="cd-box"><div class="cd-num" id="days">0</div><div class="cd-lbl">Ngày</div></div>
         <div class="cd-box"><div class="cd-num" id="hours">0</div><div class="cd-lbl">Giờ</div></div>
@@ -85,7 +85,7 @@
     <div class="cd-footer">"Học, học nữa, học mãi"</div>
 </div>
 <script>
-    const target = new Date(2026, 4, 16, 7, 0, 0).getTime();
+   const target = new Date('2027-01-16T07:00:00+07:00').getTime();
     function tick() {
         const diff = target - Date.now();
         if (diff <= 0) {
